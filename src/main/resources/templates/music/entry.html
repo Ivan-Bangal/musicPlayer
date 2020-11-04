@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+       <title> Main Menu</title>
+       <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+    <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+    <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <!--===============================================================================================-->
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" th:href="@{/css/materialize.min.css}"  media="screen,projection"/>
+
+    </head>
+
+    <body>
+        <span class="login100-form-title p-b-34 p-t-27">
+            <h1 style="color: black;"> Listar User</h1>
+        </span>
+        <table class="highlight responsive-table centered" >
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>MP3</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each=" music : ${musics}">
+                    <td> <p th:text="${music.music.titulo}" ></p> </td>
+                    <td> <p th:text="${music.music.autor}" ></p> </td>
+                    <td>
+                        <audio controls>
+                            <source  th:src="@{uploads/__(${music.music.autor})__/__(${music.name})__}" type="audio/mpeg">
+                        </audio> 
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn-floating btn-large waves-effect waves-light red" th:href="@{/music/create}"><i class="material-icons">add</i></a> 
+        <!--===============================================================================================-->
+	    <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+    <!--===============================================================================================-->
+        <script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+    <!--===============================================================================================-->
+        <script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <!--===============================================================================================-->
+        <script th:src="@{/vendor/select2/select2.min.js}"></script>
+    <!--===============================================================================================-->
+        <script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+        <script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+    <!--===============================================================================================-->
+        <script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+    <!--===============================================================================================-->
+        <script th:src="@{/js/main.js}"></script>
+
+        <script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+    </body>
+</html>
