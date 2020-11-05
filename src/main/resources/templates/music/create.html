@@ -21,11 +21,11 @@
 		<div class="parallax"><img th:src="@{/images/guitar.png}"></div>
 	</div>
 	
-	<div class="section white">
+	<div class="section">
 		<div class="row valign-wrapper login-box">
 			<div class="col s8 pull-s2 ">
-				<div class="card">
-					<span class="card-title center-align"><h1 class="center-align">Registar Musica</h1></span>
+				<div class="card indigo lighten-5">
+					<span class="card-title center-align"><h1 class="center-align">Registar uma Musica</h1></span>
 					<div class="card-content">
 						<form th:action="@{/music/insert}" method="POST" th:object="${music}"
 							enctype="multipart/form-data">
@@ -44,7 +44,7 @@
 
 							<div class="file-field input-field">
 								<div class="btn">
-									<span>File</span>
+									<span>Clique para Selecionar Musica</span>
 									<input type="file" name="mp3">
 								</div>
 								<div class="file-path-wrapper">
@@ -62,7 +62,10 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
+	<div class="parallax-container">
+		<div class="parallax"><img th:src="@{/images/guitar.png}"></div>
 	</div>
 
 

@@ -48,6 +48,10 @@ public class MusicStorageService {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
+
+            if(!file.getContentType().contains("audio")){
+                throw new RuntimeException("Can't Save Audio");
+            }
             
             // Get The Home folder with System.getenv("Home")
             Path fileDirectory = Paths.get(System.getenv("HOME") + getDefault().getSeparator() + BASE_URL
