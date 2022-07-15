@@ -2,7 +2,6 @@ package com.crytek.crysis.repository;
 
 import java.util.List;
 
-import com.crytek.crysis.model.Author;
 import com.crytek.crysis.model.Music;
 
 import org.springframework.data.repository.CrudRepository;
