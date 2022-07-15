@@ -1,6 +1,5 @@
 package com.crytek.crysis.model;
 
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,29 +8,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.springframework.lang.NonNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data
 @NoArgsConstructor
-public class Music {
-    
+public class Author {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private long id;
-
+    
     @Column
     @NonNull
-    private String titulo;
+    private String name;
 
-    @ManyToMany
-    private Set<Author> authors;
 
 }

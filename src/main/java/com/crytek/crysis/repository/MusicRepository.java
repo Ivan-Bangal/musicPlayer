@@ -2,6 +2,7 @@ package com.crytek.crysis.repository;
 
 import java.util.List;
 
+import com.crytek.crysis.model.Author;
 import com.crytek.crysis.model.Music;
 
 import org.springframework.data.repository.CrudRepository;
@@ -12,7 +13,6 @@ public interface MusicRepository extends CrudRepository<Music, Long>{
 
     List<Music> findAll();
 
-    Music findById(long id);
 
     void deleteById(long id);
 } 
