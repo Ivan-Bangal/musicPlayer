@@ -16,6 +16,7 @@ import com.crytek.crysis.model.MusicFile;
 import com.crytek.crysis.repository.MusicFileRepository;
 import com.crytek.crysis.repository.MusicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,18 +28,26 @@ public class MusicStorageService {
 
     private static String SERVER_URL;
 
-    @Autowired
+    private final String HOME_DIRECTORY;
+    
     private MusicFileRepository fileRepo;
 
-    @Autowired
     private MusicRepository repo;
 
-    private Path root = Paths.get(BASE_URL);
+    private Path root ;
+
+    public MusicStorageService( @Value("${upload.path}") String hOME_DIRECTORY, MusicFileRepository fileRepo, MusicRepository repo) {
+        HOME_DIRECTORY = hOME_DIRECTORY;
+        this.fileRepo = fileRepo;
+        this.repo = repo;
+        this.root = Paths.get(BASE_URL);
+    }
+
 
     @PostConstruct
     public void init() {
         try {
-            root = getDefault().getPath(System.getenv("HOME"), "uploads");
+            root = getDefault().getPath(HOME_DIRECTORY, "uploads");
             SERVER_URL = "http://" + InetAddress.getLocalHost().getHostAddress() + ":8080/";
             if (!Files.exists(root))
                 Files.createDirectory(root);
@@ -66,7 +75,7 @@ public class MusicStorageService {
 
                 MultipartFile copy = file;
                 
-                Path fileDirectory = Paths.get(System.getenv("HOME") + getDefault().getSeparator() + BASE_URL
+                Path fileDirectory = Paths.get(HOME_DIRECTORY + getDefault().getSeparator() + BASE_URL
                         + getDefault().getSeparator() + author.getName());
 
                 if (!Files.exists(fileDirectory)) {
