@@ -28,7 +28,8 @@ import com.crytek.crysis.model.MusicFile;
 import com.crytek.crysis.repository.MusicRepository;
 import com.crytek.crysis.service.MusicStorageService;
 
-@RestController("/musicApi")
+@RestController
+@RequestMapping("/musicApi")
 public class MusicApiController {
 
     @Autowired
