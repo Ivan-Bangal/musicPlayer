@@ -1,5 +1,7 @@
 package com.crytek.crysis.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,7 +17,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Music {
     
     @Id
@@ -29,5 +30,14 @@ public class Music {
 
     @ManyToMany
     private Set<Author> authors;
+
+    /**
+     * 
+     */
+    public Music() {
+        authors=new HashSet<Author>();
+    }
+
+    
 
 }

@@ -64,6 +64,7 @@ public class MusicStorageService {
     public MusicFile storeFile(MultipartFile file, Music music) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename()).replace(" ", "_");
+        MusicFile dbFile= null;
 
         try {
 
@@ -85,7 +86,7 @@ public class MusicStorageService {
                 copy.transferTo(new File(this.root.toAbsolutePath().toString() + getDefault().getSeparator()
                         + author.getName() + getDefault().getSeparator() + fileName));
 
-                MusicFile dbFile = new MusicFile(fileName, file.getContentType(),
+                dbFile = new MusicFile(fileName, file.getContentType(),
                         SERVER_URL + BASE_URL + "/" + author.getName() + "/" + fileName, music);
 
                 fileRepo.save(dbFile);
@@ -94,7 +95,7 @@ public class MusicStorageService {
 
             // Get The Home folder with System.getenv("Home")
 
-            return null;
+            return dbFile;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

@@ -9,23 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.crytek.crysis.model.Music;
+import com.crytek.crysis.model.MusicFile;
 import com.crytek.crysis.repository.MusicRepository;
 import com.crytek.crysis.service.MusicStorageService;
 
-@RestController
-@RequestMapping("/MusicAPI")
+@RestController("/musicApi")
 public class MusicApiController {
 
     @Autowired
@@ -34,7 +37,7 @@ public class MusicApiController {
     @Autowired
     private MusicStorageService service;
 
-    @GetMapping
+    @GetMapping("getAll")
     public ResponseEntity<List<Music>> getAll() {
         try {
             List<Music> items = new ArrayList<Music>();
@@ -62,18 +65,38 @@ public class MusicApiController {
         }
     }
 
-    @PostMapping(consumes = {MediaType.ALL_VALUE})
-    public ResponseEntity<Music> create(@RequestPart Music item,@RequestPart MultipartFile musicFile) {
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},name="create",path = "create")
+    public ResponseEntity<Music> createSong(@RequestBody Music item) {
         try {
+            
             Music savedItem = repository.save(item);
-
-            service.storeFile(musicFile, item);
 
             if(savedItem == null){
                 return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
             }
 
             return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
+
+        } catch (Exception e) {
+           return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+    
+    
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},name="upload",path = "upload")
+    public ResponseEntity<MusicFile> upload(@RequestParam("file") MultipartFile file,Long id) {
+        try {
+          
+            Optional<Music> savedItem = repository.findById(id);
+
+            if (savedItem.isPresent()) {
+                MusicFile dbfile =service.storeFile(file, savedItem.get());
+                return new ResponseEntity<>(dbfile, HttpStatus.CREATED);
+            }else{
+                return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+
+            }
+
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
         }
