@@ -45,21 +45,28 @@ O necessário para ter esta aplicação a correr são:
 
 ### Prerequisites
 
-Java 11-21 (Não defini no POM uma versão especifica de Java, mas como já faço uso do Optional tem quer ser no minimo 11)
-Maven (Para quem quiser usar o Graddle, pode usar mas não esqueça de converter o pom.xml, para o graddle)
-IntelliJ, Eclipse ou VS Code (Não se atrevam de usar o NetBeans....😂😂)
+<ul>
+  <li>
+    Java 11-21 (Não defini no POM uma versão especifica de Java, mas como já faço uso do Optional tem quer ser no minimo 11)
+  </li>
+  <li>
+    Maven (Para quem quiser usar o Graddle, pode usar mas não esqueça de converter o pom.xml, para o graddle)
+  </li>
+  <li>
+    IntelliJ, Eclipse ou VS Code (Não se atrevam de usar o NetBeans....😂😂)
+  </li>
+</ul>
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
 apos o clone do Repo execute os comandos:
 
-mvn clean install (Vai precisar de Internet para baixar os pacotes,[Lembrar que o Maven instala os pacotes na pasta C:\Users\[Seu user]\.m2] by default)
-........................... e acabou👌
+
+mvn clean install (Vai precisar de Internet para baixar os pacotes,[Lembrar que o Maven instala os pacotes na pasta C:\Users\[Seu user]\.m2] by default) ...................e acabou👌
+
+
 Os problemas vão surgir se não tem o Java instalado ou por causa de Internet
+
 
 "Ivan, isto não tem base de dados?"R: Tem, esta app como está em desenvolvimento só tem o H2 como base de dados configurado e isto não precisa instalar, dai que pensei que seria ideal para aprender e ensinar quem deseja entrar no mundo do Java avançado
 
@@ -71,7 +78,6 @@ Os testes no Spring são automatizados, basta criar que ele executa no momento d
 
 O unico teste que está neste Repositorio é o do Load dos contextos
 (Explicar isto ia levar muito tempo, recomendo uma lida na documentação do Spring), mas basicamente testa todas configurações presentes na aplicação
-
 
 ## 🎈 Usage <a name="usage"></a>
 
@@ -92,6 +98,4 @@ Ainda estou a estudar
 
 - [@Ivan-Bangal](https://github.com/Ivan-Bangal/) - Idea & Initial work
 
-
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
