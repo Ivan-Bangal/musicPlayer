@@ -8,10 +8,10 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues]](https://github.com/Ivan-Bangal/musicPlayer/issues)
-[![GitHub Pull Requests]()](https://github.com/Ivan-Bangal/musicPlayer/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
+[GitHub Issues] Link: (https://github.com/Ivan-Bangal/musicPlayer/issues)
+
+[GitHub Pull Requests] (https://github.com/Ivan-Bangal/musicPlayer/pulls)
 </div>
 
 ---
