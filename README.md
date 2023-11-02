@@ -9,7 +9,7 @@
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 
-[GitHub Issues] Link: (https://github.com/Ivan-Bangal/musicPlayer/issues)
+[GitHub Issues] (https://github.com/Ivan-Bangal/musicPlayer/issues)
 
 [GitHub Pull Requests] (https://github.com/Ivan-Bangal/musicPlayer/pulls)
 </div>
