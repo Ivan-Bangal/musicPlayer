@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.crytek.crysis.dtos.request.MusicStoreDTO;
+import com.crytek.crysis.exceptions.NotFoundException;
+import com.crytek.crysis.model.ResponseApi;
+import com.crytek.crysis.service.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,6 +41,8 @@ public class MusicApiController {
 
     @Autowired
     private MusicStorageService service;
+    @Autowired
+    private MusicService musicService;
 
     @GetMapping("getAll")
     public ResponseEntity<List<Music>> getAll() {
@@ -66,22 +72,23 @@ public class MusicApiController {
         }
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, name = "create", path = "create")
-    public ResponseEntity<Music> createSong(@RequestBody Music item) {
-        try {
-
-            Music savedItem = repository.save(item);
-
-            if (savedItem == null) {
-                return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-            }
-
-            return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-        }
+    @PostMapping
+    public ResponseEntity<ResponseApi> createSong(@RequestBody MusicStoreDTO dto) throws NotFoundException {
+        musicService.createMusic(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseApi("Musica criada com sucesso", null));
     }
+
+
+    @PostMapping("/upload")
+    public ResponseEntity<ResponseApi> uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("id")  Long id) throws NotFoundException {
+            service.storeFile(file,id);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseApi("Upload feito com sucesso", null));
+
+
+
+    }
+
+
 }
     
        /*
