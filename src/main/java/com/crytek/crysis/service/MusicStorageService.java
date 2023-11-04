@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 
 import javax.annotation.PostConstruct;
 
+import com.crytek.crysis.enums.ContentType;
+import com.crytek.crysis.exceptions.NotFoundException;
 import com.crytek.crysis.model.Author;
 import com.crytek.crysis.model.Music;
 import com.crytek.crysis.model.MusicFile;
@@ -54,12 +56,8 @@ public class MusicStorageService {
     }
 
 
-    public MusicRepository getRepo() {
-        return repo;
-    }
-
-   public MusicFile storeFile(MultipartFile file, Long musicId) {
-       Music music= musicService.f
+   public MusicFile storeFile(MultipartFile file, Long musicId) throws NotFoundException {
+       Music music= musicService.findById(musicId);
 
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename()).replace(" ", "_");
@@ -67,30 +65,31 @@ public class MusicStorageService {
 
         try {
 
-            if (!file.getContentType().contains("audio")) {
+            if (!file.getContentType().contains(ContentType.AUDIO.getValue())) {
                 throw new RuntimeException("Can't Save Audio");
             }
 
-            for (Author author : music.getAuthors()) {
 
                 MultipartFile copy = file;
                 
                 Path fileDirectory = Paths.get(HOME_DIRECTORY + getDefault().getSeparator() + BASE_URL
-                        + getDefault().getSeparator() + author.getName());
+                        + getDefault().getSeparator() + music.getId());
 
                 if (!Files.exists(fileDirectory)) {
                     Files.createDirectory(fileDirectory);
                 }
 
                 copy.transferTo(new File(this.root.toAbsolutePath().toString() + getDefault().getSeparator()
-                        + author.getName() + getDefault().getSeparator() + fileName));
+                        + music.getId() + getDefault().getSeparator() + fileName));
 
                 dbFile = new MusicFile(fileName, file.getContentType(),
-                        SERVER_URL + BASE_URL + "/" + author.getName() + "/" + fileName, music);
+                        SERVER_URL + BASE_URL + "/" + music.getId() + "/" + fileName, music);
 
+                music.setMusicFile(dbFile);
                 fileRepo.save(dbFile);
+                musicService.create(music);
 
-            }
+
 
             // Get The Home folder with System.getenv("Home")
 
