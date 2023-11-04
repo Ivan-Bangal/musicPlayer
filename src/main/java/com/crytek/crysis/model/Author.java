@@ -1,10 +1,9 @@
 package com.crytek.crysis.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import com.crytek.crysis.dtos.request.AuthorRequestDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.lang.NonNull;
 
 import lombok.Data;
@@ -14,16 +13,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "author")
 public class Author {
 
     @Id
-    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private long id;
-    
-    @Column
-    @NonNull
     private String name;
+    private String adress;
+    private String nickName;
 
 
+    public Author(AuthorRequestDTO dto){
+        this.adress=dto.adress();
+        this.name=dto.name();
+        this.nickName=dto.nickName();
+    }
 }
