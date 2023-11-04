@@ -2,8 +2,8 @@ package com.crytek.crysis.model;
 
 import java.util.Objects;
 
-import javax.persistence.*;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;

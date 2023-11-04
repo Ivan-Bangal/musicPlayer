@@ -1,11 +1,11 @@
 package com.crytek.crysis.model;
 
 import com.crytek.crysis.service.MusicAuthorService;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor

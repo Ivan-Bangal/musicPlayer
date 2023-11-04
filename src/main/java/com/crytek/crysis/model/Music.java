@@ -1,8 +1,8 @@
 package com.crytek.crysis.model;
 
-import javax.persistence.*;
 
 import com.crytek.crysis.dtos.request.MusicStoreDTO;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
