@@ -34,7 +34,7 @@ public class MusicApiController {
 
     @Autowired
     MusicRepository repository;
-    
+
     @Autowired
     private MusicStorageService service;
 
@@ -56,7 +56,7 @@ public class MusicApiController {
 
     @GetMapping("{id}")
     public ResponseEntity<Music> getById(@PathVariable("id") long id) {
-        
+
         Optional<Music> existingItemOptional = repository.findById(id);
 
         if (existingItemOptional.isPresent()) {
@@ -66,24 +66,25 @@ public class MusicApiController {
         }
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},name="create",path = "create")
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, name = "create", path = "create")
     public ResponseEntity<Music> createSong(@RequestBody Music item) {
         try {
-            
+
             Music savedItem = repository.save(item);
 
-            if(savedItem == null){
+            if (savedItem == null) {
                 return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
             }
 
             return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
 
         } catch (Exception e) {
-           return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
         }
     }
+}
     
-    
+       /*
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},name="upload",path = "upload")
     public ResponseEntity<MusicFile> upload(@RequestParam("file") MultipartFile file,Long id) {
         try {
@@ -103,7 +104,7 @@ public class MusicApiController {
         }
     }
 
-    @PutMapping("{id}")
+@PutMapping("{id}")
     public ResponseEntity<Music> update(@PathVariable("id") long id, @RequestBody Music item) {
         Optional<Music> existingItemOptional = repository.findById(id);
         if (existingItemOptional.isPresent()) {
@@ -120,6 +121,8 @@ public class MusicApiController {
         }
     }
 
+
+
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
         try {
@@ -129,6 +132,8 @@ public class MusicApiController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
+
+
 
     @GetMapping("/GetMusicFile/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable("id") long id){
@@ -145,4 +150,5 @@ public class MusicApiController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
-}
+
+        */

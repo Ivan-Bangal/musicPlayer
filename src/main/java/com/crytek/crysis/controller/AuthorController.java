@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.crytek.crysis.dtos.request.AuthorRequestDTO;
+import com.crytek.crysis.model.ResponseApi;
+import com.crytek.crysis.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +23,13 @@ import com.crytek.crysis.model.Author;
 import com.crytek.crysis.repository.AuthorRepository;
 
 @RestController
-@RequestMapping("/Author")
+@RequestMapping("/author")
 public class AuthorController {
 
     @Autowired
     AuthorRepository repository;
+    @Autowired
+    private AuthorService authorService;
 
     @GetMapping
     public ResponseEntity<List<Author>> getAll() {
@@ -54,13 +59,9 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<Author> create(@RequestBody Author item) {
-        try {
-            Author savedItem = repository.save(item);
-            return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-        }
+    public ResponseEntity<ResponseApi> create(@RequestBody AuthorRequestDTO dto) throws Exception {
+        authorService.createAuthor(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseApi("Autor criado com sucesso", null));
     }
 
     @PutMapping("{id}")

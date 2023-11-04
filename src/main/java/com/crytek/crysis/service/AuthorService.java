@@ -26,14 +26,18 @@ public class AuthorService {
     public boolean existsByNameAndnNickName(String name, String nickName){
         return authorRepository.existsByNameAndNickName(name, nickName);
     }
-    public Author createAuthor(AuthorRequestDTO dto) throws ConflictException {
-        boolean authorExists= existsByNameAndnNickName(dto.name(), dto.nickName());
-        if(authorExists){
-            throw  new ConflictException("Autor com esse nome e nickname ja existe");
+    public Author createAuthor(AuthorRequestDTO dto) throws Exception {
+        try {
+            boolean authorExists = existsByNameAndnNickName(dto.name(), dto.nickName());
+            if (authorExists) {
+                throw new ConflictException("Autor com esse nome e nickname ja existe");
+            }
+            Author newAuthor = new Author(dto);
+            create(newAuthor);
+            return newAuthor;
+        }catch (Exception e){
+            throw  new Exception(e.getMessage());
         }
-        Author newAuthor= new Author(dto);
-        create(newAuthor);
-        return newAuthor;
     }
     public Author findById(Long id) throws NotFoundException {
         return authorRepository.findById(id).orElseThrow(()->new NotFoundException("Autor nao foi enccontrado "));

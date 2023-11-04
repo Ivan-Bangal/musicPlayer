@@ -62,7 +62,7 @@ public class MusicStorageService {
         return repo;
     }
 
-    public MusicFile storeFile(MultipartFile file, Music music) {
+   public MusicFile storeFile(MultipartFile file, Music music) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename()).replace(" ", "_");
         MusicFile dbFile= null;
@@ -103,6 +103,8 @@ public class MusicStorageService {
         }
     }
 
+
+
     /*
      * Method Responsible for Fetching The File In System Enviroment
      * 
@@ -118,7 +120,7 @@ public class MusicStorageService {
         }
     }
 
-    public byte[] recover(Music music) {
+   /* public byte[] recover(Music music) {
         try {
 
             MusicFile file = fileRepo.findByMusic(music);
@@ -130,5 +132,7 @@ public class MusicStorageService {
             throw new RuntimeException("Erro recuperando a foto", e);
         }
     }
+
+    */
 
 }
