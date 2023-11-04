@@ -24,24 +24,20 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class MusicStorageService {
 
+    @Autowired
     private static String BASE_URL = "uploads";
-
+    @Autowired
     private static String SERVER_URL;
+    @Autowired
+    private  String HOME_DIRECTORY;
+    @Autowired
 
-    private final String HOME_DIRECTORY;
-    
     private MusicFileRepository fileRepo;
-
-    private MusicRepository repo;
+    @Autowired
+    private MusicService musicService;
+    @Autowired
 
     private Path root ;
-
-    public MusicStorageService( @Value("${upload.path}") String hOME_DIRECTORY, MusicFileRepository fileRepo, MusicRepository repo) {
-        HOME_DIRECTORY = hOME_DIRECTORY;
-        this.fileRepo = fileRepo;
-        this.repo = repo;
-        this.root = Paths.get(BASE_URL);
-    }
 
 
     @PostConstruct
@@ -62,7 +58,9 @@ public class MusicStorageService {
         return repo;
     }
 
-   public MusicFile storeFile(MultipartFile file, Music music) {
+   public MusicFile storeFile(MultipartFile file, Long musicId) {
+       Music music= musicService.f
+
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename()).replace(" ", "_");
         MusicFile dbFile= null;
