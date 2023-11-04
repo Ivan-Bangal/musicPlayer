@@ -13,11 +13,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>crysis</name>
 	<description>Demo project for Spring Boot</description>
-
-
-
+	<properties>
+		<java.version>17</java.version>
+	</properties>
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -108,11 +108,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<folders>
-						<folder>${project.build.directory}/../musics</folder>
-					</folders>
-				</configuration>
+
 			</plugin>
 		</plugins>
 	</build>

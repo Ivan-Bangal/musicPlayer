@@ -42,7 +42,7 @@ public class AuthorController {
         }
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Author> getById(@PathVariable("id") Long id) {
         Optional<Author> existingItemOptional = repository.findById(id);
 
