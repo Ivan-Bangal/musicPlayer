@@ -8,7 +8,7 @@ import static java.nio.file.FileSystems.getDefault;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.annotation.PostConstruct;
+
 
 import com.crytek.crysis.enums.ContentType;
 import com.crytek.crysis.exceptions.NotFoundException;
@@ -17,6 +17,7 @@ import com.crytek.crysis.model.Music;
 import com.crytek.crysis.model.MusicFile;
 import com.crytek.crysis.repository.MusicFileRepository;
 import com.crytek.crysis.repository.MusicRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,14 +32,13 @@ public class MusicStorageService {
     @Autowired
     private static String SERVER_URL;
     @Autowired
+    @Value("${upload.path}")
     private  String HOME_DIRECTORY;
     @Autowired
 
     private MusicFileRepository fileRepo;
     @Autowired
     private MusicService musicService;
-    @Autowired
-
     private Path root ;
 
 

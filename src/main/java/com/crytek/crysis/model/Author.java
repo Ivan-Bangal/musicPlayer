@@ -1,8 +1,8 @@
 package com.crytek.crysis.model;
 
-import javax.persistence.*;
 
 import com.crytek.crysis.dtos.request.AuthorRequestDTO;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import org.springframework.lang.NonNull;
 

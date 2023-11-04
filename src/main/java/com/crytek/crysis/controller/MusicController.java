@@ -25,9 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/music")
+@Deprecated
 public class MusicController {
     
-    @Autowired
+  /*  @Autowired
     private MusicRepository musicRepo;
 
     @Autowired
@@ -50,12 +51,15 @@ public class MusicController {
         return "music/create";
     }
 
+
     @PostMapping("/insert")
     public String insert(Model model,@ModelAttribute Music music,@ModelAttribute MultipartFile mp3){
         musicRepo.save(music);
         service.storeFile(mp3, music);
         return "redirect:/music";
     }
+
+   */
 
 
 

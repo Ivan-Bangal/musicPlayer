@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MusicRepository extends CrudRepository<Music, Long>{
 
-    List<Music> findByTitulo(String titulo);
+    List<Music> findByTitle(String titulo);
 
     List<Music> findAll();
 
