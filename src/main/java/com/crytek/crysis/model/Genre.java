@@ -19,4 +19,8 @@ public class Genre {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String designation;
+
+    public Genre(String designation){
+        this.designation=designation;
+    }
 }

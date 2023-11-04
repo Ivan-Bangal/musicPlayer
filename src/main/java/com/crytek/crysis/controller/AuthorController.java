@@ -86,4 +86,9 @@ public class AuthorController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
+
+    @GetMapping("name/{name}")
+    public ResponseEntity<ResponseApi> findByName(@PathVariable(name = "name") String name) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseApi("Autor", authorService.findByName(name)));
+    }
 }

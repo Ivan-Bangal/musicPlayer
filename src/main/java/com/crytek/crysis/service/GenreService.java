@@ -6,6 +6,8 @@ import com.crytek.crysis.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GenreService {
 
@@ -14,5 +16,13 @@ public class GenreService {
 
     public Genre findById(Long id) throws NotFoundException {
         return genreRepository.findById(id).orElseThrow(()->new NotFoundException("O genero com o id " +id + "Nao foi encontrado"));
+    }
+
+    public List<Genre>listAll(){
+        return genreRepository.findAll();
+    }
+
+    public Genre create(Genre genre){
+        return genreRepository.save(genre);
     }
 }

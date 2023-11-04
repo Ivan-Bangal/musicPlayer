@@ -26,6 +26,7 @@ public class AuthorService {
         return authorRepository.existsByNameAndNickName(name, nickName);
     }
     public Author createAuthor(AuthorRequestDTO dto) throws Exception {
+        System.out.println(dto);
         try {
             boolean authorExists = existsByNameAndnNickName(dto.name(), dto.nickName());
             if (authorExists) {
